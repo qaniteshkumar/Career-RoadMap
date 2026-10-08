@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerMap Pro | Discover Your Future</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#f6f8fc;--card:#fff;--text:#111827;--muted:#667085;
+--primary:#6d5dfc;--primary2:#8b5cf6;--pink:#ec4899;
+--green:#16a34a;--border:#e6e9f0;--dark:#0b1020;
+--shadow:0 15px 45px rgba(20,25,60,.09)
+}
+body.dark{
+--bg:#090d19;--card:#12182a;--text:#f8fafc;--muted:#9ca8bd;
+--border:#273047;--shadow:0 15px 45px rgba(0,0,0,.35)
+}
+html{scroll-behavior:smooth}
+body{
+font-family:Inter,Segoe UI,Arial,sans-serif;
+background:var(--bg);color:var(--text);transition:.3s
+}
+button{font-family:inherit}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{
+height:74px;background:var(--card);border-bottom:1px solid var(--border);
+display:flex;align-items:center;justify-content:space-between;
+padding:0 6%;position:sticky;top:0;z-index:1000
+}
+.logo{font-size:24px;font-weight:900;color:var(--primary)}
+.logo span{color:var(--pink)}
+.navlinks{display:flex;gap:27px;list-style:none}
+.navlinks a{font-size:14px;font-weight:700;color:var(--text)}
+.navlinks a:hover{color:var(--primary)}
+.nav-actions{display:flex;gap:9px}
+.icon{
+width:41px;height:41px;border:1px solid var(--border);
+border-radius:12px;background:var(--card);color:var(--text);
+cursor:pointer;font-size:17px
+}
+
+/* HERO */
+.hero{
+min-height:690px;padding:80px 6%;
+display:grid;grid-template-columns:1.1fr .9fr;gap:40px;
+align-items:center;
+background:
+radial-gradient(circle at 85% 20%,#ddd6fe 0,transparent 27%),
+radial-gradient(circle at 10% 85%,#dbeafe 0,transparent 27%)
+}
+.dark .hero{
+background:
+radial-gradient(circle at 85% 20%,#292052 0,transparent 30%),
+radial-gradient(circle at 10% 85%,#102544 0,transparent 28%)
+}
+.badge{
+display:inline-block;background:#eeeafd;color:#5b4bc4;
+padding:9px 15px;border-radius:30px;font-size:12px;font-weight:900;
+margin-bottom:20px
+}
+.dark .badge{background:#29234a;color:#c4b5fd}
+.hero h1{
+font-size:62px;line-height:1.02;letter-spacing:-3px;
+max-width:750px
+}
+.hero h1 span{
+background:linear-gradient(90deg,var(--primary),var(--pink));
+-webkit-background-clip:text;color:transparent
+}
+.hero p{
+font-size:18px;line-height:1.75;color:var(--muted);
+max-width:650px;margin:25px 0 30px
+}
+.btn{
+border:0;border-radius:13px;padding:14px 23px;
+background:linear-gradient(135deg,var(--primary),var(--primary2));
+color:white;font-weight:900;cursor:pointer;
+box-shadow:0 12px 30px #6d5dfc35;transition:.25s
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 18px 35px #6d5dfc55}
+.btn.white{background:var(--card);color:var(--primary);box-shadow:none}
+.stats{display:flex;gap:32px;margin-top:36px}
+.stat strong{display:block;font-size:27px}
+.stat small{color:var(--muted)}
+.hero-visual{height:450px;position:relative;display:flex;align-items:center;justify-content:center}
+.glow{
+position:absolute;width:310px;height:310px;border-radius:50%;
+background:linear-gradient(135deg,#6d5dfc55,#ec489955);
+filter:blur(25px)
+}
+.circle{
+width:280px;height:280px;border:2px dashed #a78bfa;
+border-radius:50%;position:absolute;animation:rotate 18s linear infinite
+}
+@keyframes rotate{to{transform:rotate(360deg)}}
+.center-card{
+width:145px;height:145px;border-radius:38px;
+background:linear-gradient(135deg,var(--primary),var(--pink));
+color:white;display:flex;align-items:center;justify-content:center;
+font-size:55px;z-index:2;box-shadow:0 25px 70px #6d5dfc55
+}
+.float-card{
+position:absolute;background:var(--card);border:1px solid var(--border);
+box-shadow:var(--shadow);padding:13px 17px;border-radius:16px;
+font-weight:800;z-index:3
+}
+.fc1{top:40px;left:20px}.fc2{top:75px;right:5px}
+.fc3{bottom:65px;left:15px}.fc4{bottom:25px;right:35px}
+
+/* GENERAL */
+.section{padding:85px 6%}
+.heading{text-align:center;max-width:720px;margin:0 auto 45px}
+.heading h2{font-size:40px;margin-bottom:12px}
+.heading p{color:var(--muted);line-height:1.7}
+
+/* SEARCH */
+.searchbox{
+max-width:600px;margin:0 auto 35px;position:relative
+}
+.searchbox input{
+width:100%;padding:17px 20px;border-radius:15px;
+border:1px solid var(--border);background:var(--card);
+color:var(--text);outline:none;font-size:15px
+}
+
+/* CAREERS */
+.careers{
+display:grid;grid-template-columns:repeat(4,1fr);gap:18px
+}
+.career{
+background:var(--card);border:1px solid var(--border);
+padding:25px;border-radius:22px;cursor:pointer;
+transition:.25s;position:relative;overflow:hidden
+}
+.career:hover{
+transform:translateY(-8px);border-color:#9b8cff;
+box-shadow:var(--shadow)
+}
+.emoji{font-size:42px;margin-bottom:16px}
+.career h3{margin-bottom:8px}
+.career p{font-size:13px;line-height:1.6;color:var(--muted)}
+.tag{
+display:inline-block;margin-top:15px;padding:6px 10px;
+border-radius:20px;background:#efedff;color:#5b4bc4;
+font-size:10px;font-weight:900
+}
+.dark .tag{background:#29234a;color:#c4b5fd}
+
+/* ADVISOR */
+.advisor{
+background:linear-gradient(135deg,#14122c,#30265d);
+color:white
+}
+.quiz{
+max-width:850px;margin:auto;background:#211b40;
+border:1px solid #493d73;border-radius:25px;padding:35px
+}
+.qtop{
+display:flex;justify-content:space-between;
+color:#c4b5fd;font-weight:800;margin-bottom:25px
+}
+.question{font-size:25px;margin-bottom:23px}
+.options{display:grid;gap:12px}
+.option{
+width:100%;text-align:left;padding:17px;border-radius:13px;
+background:#2b244d;border:1px solid #4b4072;color:white;
+cursor:pointer;transition:.2s
+}
+.option:hover,.option.active{
+background:#6d5dfc;border-color:#a99fff
+}
+.result{text-align:center;display:none}
+.match{
+font-size:68px;font-weight:900;color:#a99fff;margin:15px
+}
+
+/* DASHBOARD */
+.dashboard{
+display:grid;grid-template-columns:1.2fr .8fr;gap:20px
+}
+.panel{
+background:var(--card);border:1px solid var(--border);
+border-radius:22px;padding:27px;box-shadow:var(--shadow)
+}
+.panel h3{margin-bottom:20px}
+.levelbox{display:flex;gap:18px;align-items:center}
+.level{
+width:75px;height:75px;border-radius:23px;
+background:linear-gradient(135deg,var(--primary),var(--pink));
+color:white;display:flex;align-items:center;
+justify-content:center;font-size:26px;font-weight:900
+}
+.progress{
+height:12px;background:var(--border);border-radius:20px;
+overflow:hidden;margin:22px 0 10px
+}
+.progressbar{
+height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--pink));
+transition:1s
+}
+.progressinfo{
+display:flex;justify-content:space-between;
+font-size:13px;color:var(--muted)
+}
+.achievements{
+display:grid;grid-template-columns:repeat(3,1fr);gap:12px
+}
+.achievement{
+padding:17px;border:1px solid var(--border);
+border-radius:17px;text-align:center
+}
+.achievement div{font-size:30px;margin-bottom:8px}
+.achievement small{color:var(--muted)}
+
+/* ROADMAP */
+.roadmap{display:grid;gap:16px;max-width:950px;margin:auto}
+.step{
+display:flex;align-items:center;gap:18px;
+background:var(--card);border:1px solid var(--border);
+padding:21px;border-radius:18px;transition:.2s
+}
+.step.done{border-color:#86efac;background:#f0fdf4}
+.dark .step.done{background:#10251a}
+.step-number{
+min-width:48px;height:48px;border-radius:15px;
+background:#eeebff;color:#5b4bc4;
+display:flex;align-items:center;justify-content:center;
+font-weight:900
+}
+.step-text{flex:1}
+.step-text h4{margin-bottom:6px}
+.step-text p{font-size:13px;color:var(--muted);line-height:1.5}
+.complete{
+padding:9px 13px;border-radius:9px;
+border:1px solid var(--border);
+background:var(--card);color:var(--text);cursor:pointer
+}
+.done .complete{background:#16a34a;color:white;border-color:#16a34a}
+
+/* SKILLS */
+.skills{
+display:flex;flex-wrap:wrap;gap:10px;justify-content:center
+}
+.skill{
+padding:11px 15px;border-radius:30px;
+background:var(--card);border:1px solid var(--border);
+font-weight:700;font-size:13px
+}
+
+/* CTA */
+.cta{
+margin:20px 6% 70px;padding:70px 25px;
+text-align:center;color:white;border-radius:30px;
+background:linear-gradient(135deg,#5b4bc4,#db2777);
+box-shadow:0 25px 70px #6d5dfc30
+}
+.cta h2{font-size:40px;margin-bottom:12px}
+.cta p{margin-bottom:25px;color:#eee}
+
+/* FOOTER */
+footer{
+background:#0c1222;color:#9aa5bd;text-align:center;
+padding:30px;font-size:13px
+}
+
+/* MODAL */
+.modal{
+display:none;position:fixed;inset:0;background:#0009;
+z-index:3000;align-items:center;justify-content:center;padding:20px
+}
+.modal.show{display:flex}
+.modalbox{
+max-width:570px;width:100%;background:var(--card);
+border-radius:25px;padding:30px;position:relative
+}
+.close{
+position:absolute;right:20px;top:15px;background:none;
+border:0;color:var(--text);font-size:27px;cursor:pointer
+}
+.modalbox p{color:var(--muted);line-height:1.7}
+
+/* TOAST */
+.toast{
+position:fixed;right:20px;bottom:20px;background:#111827;color:white;
+padding:15px 20px;border-radius:13px;
+transform:translateY(100px);opacity:0;transition:.3s;z-index:4000
+}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* MOBILE */
+@media(max-width:1000px){
+.careers{grid-template-columns:repeat(2,1fr)}
+.hero{grid-template-columns:1fr}
+.hero-visual{display:none}
+.dashboard{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+.navlinks{display:none}
+.hero{padding:60px 5%}
+.hero h1{font-size:43px;letter-spacing:-2px}
+.stats{gap:16px}
+.section{padding:65px 5%}
+.heading h2{font-size:31px}
+.careers{grid-template-columns:1fr}
+.quiz{padding:22px}
+.achievements{grid-template-columns:1fr}
+.step{flex-wrap:wrap}
+.complete{margin-left:66px}
+.cta h2{font-size:31px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+<div class="logo">Career<span>Map</span> Pro ✦</div>
+
+<ul class="navlinks">
+<li><a href="#careers">Careers</a></li>
+<li><a href="#advisor">AI Advisor</a></li>
+<li><a href="#dashboard">Dashboard</a></li>
+<li><a href="#roadmap">Roadmap</a></li>
+</ul>
+
+<div class="nav-actions">
+<button class="icon" onclick="toggleDark()">◐</button>
+<button class="icon" onclick="openInfo()">?</button>
+</div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+
+<div>
+
+<div class="badge">✦ SMART CAREER DISCOVERY PLATFORM</div>
+
+<h1>
+Your career isn't a guess.
+<span>It's a journey.</span>
+</h1>
+
+<p>
+Explore careers, discover your strengths, identify skill gaps and
+build a personalized roadmap towards your future.
+</p>
+
+<button class="btn" onclick="scrollToAdvisor()">
+Discover My Career →
+</button>
+
+<button class="btn white" onclick="scrollToCareers()">
+Explore Careers
+</button>
+
+<div class="stats">
+<div class="stat">
+<strong>50+</strong>
+<small>Career Paths</small>
+</div>
+
+<div class="stat">
+<strong>6</strong>
+<small>Roadmap Stages</small>
+</div>
+
+<div class="stat">
+<strong>∞</strong>
+<small>Possibilities</small>
+</div>
+</div>
+
+</div>
+
+
+<div class="hero-visual">
+
+<div class="glow"></div>
+<div class="circle"></div>
+
+<div class="center-card">🚀</div>
+
+<div class="float-card fc1">🧠 Skills</div>
+<div class="float-card fc2">🎯 Goals</div>
+<div class="float-card fc3">🏆 Achievements</div>
+<div class="float-card fc4">📈 Progress</div>
+
+</div>
+
+</section>
+
+
+<!-- CAREER EXPLORER -->
+<section class="section" id="careers">
+
+<div class="heading">
+
+<h2>Explore Career Paths</h2>
+
+<p>
+Don't choose a career because everyone else is choosing it.
+Explore what actually matches your interests.
+</p>
+
+</div>
+
+
+<div class="searchbox">
+
+<input
+id="careerSearch"
+type="text"
+placeholder="🔎 Search career... e.g. developer, design, AI"
+oninput="filterCareers()">
+
+</div>
+
+
+<div class="careers" id="careerGrid">
+
+<div class="career"
+data-name="software developer"
+onclick="chooseCareer('Software Developer','💻',['HTML','CSS','JavaScript','React','Git','Problem Solving'])">
+
+<div class="emoji">💻</div>
+<h3>Software Developer</h3>
+<p>Build websites, apps and software products.</p>
+<span class="tag">HIGH DEMAND</span>
+
+</div>
+
+
+<div class="career"
+data-name="data scientist"
+onclick="chooseCareer('Data Scientist','📊',['Python','SQL','Statistics','Pandas','Machine Learning','Data Visualization'])">
+
+<div class="emoji">📊</div>
+<h3>Data Scientist</h3>
+<p>Turn data into insights and intelligent decisions.</p>
+<span class="tag">DATA + AI</span>
+
+</div>
+
+
+<div class="career"
+data-name="ui ux designer"
+onclick="chooseCareer('UI/UX Designer','🎨',['Figma','UX Research','Wireframes','Prototyping','Visual Design','Usability'])">
+
+<div class="emoji">🎨</div>
+<h3>UI/UX Designer</h3>
+<p>Design products people enjoy using.</p>
+<span class="tag">CREATIVE</span>
+
+</div>
+
+
+<div class="career"
+data-name="ai engineer artificial intelligence"
+onclick="chooseCareer('AI Engineer','🤖',['Python','Machine Learning','Deep Learning','APIs','Data','AI Tools'])">
+
+<div class="emoji">🤖</div>
+<h3>AI Engineer</h3>
+<p>Build intelligent applications and systems.</p>
+<span class="tag">FUTURE TECH</span>
+
+</div>
+
+
+<div class="career"
+data-name="cyber security"
+onclick="chooseCareer('Cyber Security','🔐',['Networking','Linux','Security','Ethical Hacking','Cloud','Risk Management'])">
+
+<div class="emoji">🔐</div>
+<h3>Cyber Security</h3>
+<p>Protect systems and digital information.</p>
+<span class="tag">SECURITY</span>
+
+</div>
+
+
+<div class="career"
+data-name="digital marketing"
+onclick="chooseCareer('Digital Marketer','📱',['SEO','Content','Social Media','Analytics','Branding','Communication'])">
+
+<div class="emoji">📱</div>
+<h3>Digital Marketer</h3>
+<p>Grow brands through digital channels.</p>
+<span class="tag">GROWTH</span>
+
+</div>
+
+
+<div class="career"
+data-name="cloud engineer devops"
+onclick="chooseCareer('Cloud Engineer','☁️',['Linux','Cloud','Networking','Docker','DevOps','Security'])">
+
+<div class="emoji">☁️</div>
+<h3>Cloud Engineer</h3>
+<p>Build and manage modern cloud infrastructure.</p>
+<span class="tag">CLOUD</span>
+
+</div>
+
+
+<div class="career"
+data-name="product manager"
+onclick="chooseCareer('Product Manager','🧩',['Research','Strategy','Communication','Analytics','Leadership','Product Thinking'])">
+
+<div class="emoji">🧩</div>
+<h3>Product Manager</h3>
+<p>Connect customers, business and technology.</p>
+<span class="tag">LEADERSHIP</span>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CAREER ADVISOR -->
+<section class="section advisor" id="advisor">
+
+<div class="heading">
+
+<h2>🧠 CareerMatch Advisor</h2>
+
+<p>
+Answer five questions and discover which career direction
+matches your interests.
+</p>
+
+</div>
+
+
+<div class="quiz">
+
+<div id="quizArea">
+
+<div class="qtop">
+
+<span id="questionNumber">
+Question 1 of 5
+</span>
+
+<span id="questionPercent">
+20%
+</span>
+
+</div>
+
+
+<div class="question" id="questionText">
+What kind of work sounds most exciting?
+</div>
+
+
+<div class="options" id="options"></div>
+
+</div>
+
+
+<div class="result" id="result">
+
+<p>Your strongest career match is</p>
+
+<div class="match" id="matchScore">92%</div>
+
+<h2 id="matchCareer">💻 Software Developer</h2>
+
+<p id="matchDescription">
+Your answers show a strong match with this career.
+</p>
+
+<br>
+
+<button class="btn" onclick="goRoadmap()">
+Build My Roadmap →
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+<section class="section" id="dashboard">
+
+<div class="heading">
+
+<h2>🎯 Your Career Dashboard</h2>
+
+<p>
+Your learning journey becomes measurable when you can see your progress.
+</p>
+
+</div>
+
+
+<div class="dashboard">
+
+
+<div class="panel">
+
+<h3 id="dashboardCareer">
+💻 Software Developer
+</h3>
+
+
+<div class="levelbox">
+
+<div class="level" id="level">
+01
+</div>
+
+<div>
+
+<strong id="xpText">
+0 / 600 XP
+</strong>
+
+<p style="color:var(--muted);margin-top:5px">
+Complete roadmap steps to level up.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="progress">
+
+<div class="progressbar" id="progressBar"></div>
+
+</div>
+
+
+<div class="progressinfo">
+
+<span>Career readiness</span>
+
+<b id="progressPercent">
+0%
+</b>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h3>🏆 Achievements</h3>
+
+
+<div class="achievements">
+
+<div class="achievement">
+<div>🌱</div>
+<b>Starter</b>
+<br>
+<small>Begin journey</small>
+</div>
+
+
+<div class="achievement">
+<div>🔥</div>
+<b>Focused</b>
+<br>
+<small>3 steps</small>
+</div>
+
+
+<div class="achievement">
+<div>🏆</div>
+<b>Ready</b>
+<br>
+<small>6 steps</small>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ROADMAP -->
+<section class="section" id="roadmap">
+
+<div class="heading">
+
+<h2 id="roadmapTitle">
+🚀 Software Developer Roadmap
+</h2>
+
+<p>
+Six simple stages from discovering your direction to launching your career.
+</p>
+
+</div>
+
+
+<div class="roadmap" id="roadmapList"></div>
+
+</section>
+
+
+<!-- SKILL GAP -->
+<section class="section">
+
+<div class="heading">
+
+<h2>🧩 Skill Gap Analyzer</h2>
+
+<p>
+Based on your selected career, these are the skills you should focus on.
+</p>
+
+</div>
+
+
+<div class="panel">
+
+<div class="skills" id="skillList"></div>
+
+</div>
+
+</section>
+
+
+<!-- CTA -->
+<div class="cta">
+
+<h2>Stop wondering. Start building.</h2>
+
+<p>
+Your dream career doesn't happen in one day.
+But one skill today can change your tomorrow.
+</p>
+
+<button class="btn white" onclick="scrollToAdvisor()">
+Start My Career Journey 🚀
+</button>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+
+<p>
+© 2026 CareerMap Pro • Interactive Career Discovery Platform
+</p>
+
+</footer>
+
+
+<!-- INFO MODAL -->
+<div class="modal" id="infoModal">
+
+<div class="modalbox">
+
+<button class="close" onclick="closeInfo()">×</button>
+
+<h2>About CareerMap Pro</h2>
+
+<br>
+
+<p>
+CareerMap Pro is an interactive career discovery concept designed
+to help students move from career confusion to a structured learning
+journey.
+</p>
+
+<br>
+
+<p>
+Students can explore careers, complete a career-matching quiz,
+identify relevant skills, follow a roadmap and track progress.
+</p>
+
+<br>
+
+<p>
+<b>Prototype note:</b> The CareerMatch system in this demo runs
+locally in JavaScript. A production version could connect it to
+real AI, authentication, a database, verified courses and live
+career data.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+Step completed! +100 XP 🎉
+</div>
+
+
+<script>
+
+/* =========================
+   GLOBAL DATA
+========================= */
+
+let selectedCareer="Software Developer";
+
+let selectedEmoji="💻";
+
+let selectedSkills=[
+"HTML","CSS","JavaScript",
+"React","Git","Problem Solving"
+];
+
+let completedSteps=
+JSON.parse(localStorage.getItem("career_steps")||"[]");
+
+
+const roadmapSteps=[
+
+[
+"Discover",
+"Understand your interests and career direction.",
+"Research your field and define your goal."
+],
+
+[
+"Fundamentals",
+"Build a strong foundation.",
+"Learn the core concepts of your chosen field."
+],
+
+[
+"Core Skills",
+"Master job-ready skills.",
+"Practice the technologies and concepts employers value."
+],
+
+[
+"Build Projects",
+"Turn knowledge into proof.",
+"Create real-world projects to demonstrate your ability."
+],
+
+[
+"Portfolio",
+"Show your work professionally.",
+"Build a portfolio, resume and professional profile."
+],
+
+[
+"Launch",
+"Take your first career step.",
+"Apply for internships, competitions, freelance work and jobs."
+]
+
+];
+
+
+/* =========================
+   CAREER SELECT
+========================= */
+
+function chooseCareer(name,emoji,skills){
+
+selectedCareer=name;
+selectedEmoji=emoji;
+selectedSkills=skills;
+
+document.getElementById("dashboardCareer").innerText=
+emoji+" "+name;
+
+document.getElementById("roadmapTitle").innerText=
+emoji+" "+name+" Roadmap";
+
+renderSkills();
+
+renderRoadmap();
+
+showToast(name+" selected 🎯");
+
+document.getElementById("roadmap").scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================
+   SKILLS
+========================= */
+
+function renderSkills(){
+
+document.getElementById("skillList").innerHTML=
+selectedSkills.map(skill=>
+`<span class="skill">${skill}</span>`
+).join("");
+
+}
+
+
+/* =========================
+   ROADMAP
+========================= */
+
+function renderRoadmap(){
+
+const list=document.getElementById("roadmapList");
+
+list.innerHTML=
+roadmapSteps.map((step,index)=>{
+
+let done=completedSteps.includes(index);
+
+return `
+
+<div class="step ${done?"done":""}">
+
+<div class="step-number">
+${done?"✓":index+1}
+</div>
+
+<div class="step-text">
+
+<h4>${step[0]}</h4>
+
+<p>
+${step[1]} ${step[2]}
+</p>
+
+</div>
+
+<button
+class="complete"
+onclick="toggleStep(${index})">
+
+${done?"✓ Completed":"Complete +100 XP"}
+
+</button>
+
+</div>
+
+`;
+
+}).join("");
+
+updateProgress();
+
+}
+
+
+/* =========================
+   COMPLETE STEP
+========================= */
+
+function toggleStep(index){
+
+if(completedSteps.includes(index)){
+
+completedSteps=
+completedSteps.filter(x=>x!==index);
+
+showToast("Step reopened");
+
+}else{
+
+completedSteps.push(index);
+
+showToast("Step completed! +100 XP 🎉");
+
+}
+
+localStorage.setItem(
+"career_steps",
+JSON.stringify(completedSteps)
+);
+
+renderRoadmap();
+
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function updateProgress(){
+
+let percentage=
+Math.round((completedSteps.length/6)*100);
+
+let xp=
+completedSteps.length*100;
+
+document.getElementById("progressBar").style.width=
+percentage+"%";
+
+document.getElementById("progressPercent").innerText=
+percentage+"%";
+
+document.getElementById("xpText").innerText=
+xp+" / 600 XP";
+
+let level=
+Math.min(6,completedSteps.length+1);
+
+document.getElementById("level").innerText=
+String(level).padStart(2,"0");
+
+}
+
+
+/* =========================
+   CAREER SEARCH
+========================= */
+
+function filterCareers(){
+
+let search=
+document.getElementById("careerSearch")
+.value.toLowerCase();
+
+let cards=
+document.querySelectorAll(".career");
+
+cards.forEach(card=>{
+
+let name=
+card.getAttribute("data-name");
+
+if(name.includes(search)){
+
+card.style.display="block";
+
+}else{
+
+card.style.display="none";
+
+}
+
+});
+
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+const questions=[
+
+{
+q:"What kind of work sounds most exciting?",
+
+options:[
+["Building websites and apps","Software Developer"],
+["Finding patterns in data","Data Scientist"],
+["Designing beautiful experiences","UI/UX Designer"],
+["Building intelligent systems","AI Engineer"]
+]
+},
+
+{
+q:"Which activity would you enjoy most?",
+
+options:[
+["Writing code","Software Developer"],
+["Analyzing numbers","Data Scientist"],
+["Designing interfaces","UI/UX Designer"],
+["Experimenting with AI","AI Engineer"]
+]
+},
+
+{
+q:"How do you prefer solving problems?",
+
+options:[
+["Logical step-by-step thinking","Software Developer"],
+["Using evidence and data","Data Scientist"],
+["Understanding people","UI/UX Designer"],
+["Trying new technology","AI Engineer"]
+]
+},
+
+{
+q:"Which skill would you like to master?",
+
+options:[
+["Programming","Software Developer"],
+["Statistics","Data Scientist"],
+["Visual design","UI/UX Designer"],
+["Machine learning","AI Engineer"]
+]
+},
+
+{
+q:"Which future sounds most exciting?",
+
+options:[
+["Creating the next app","Software Developer"],
+["Predicting trends","Data Scientist"],
+["Designing products","UI/UX Designer"],
+["Building intelligent systems","AI Engineer"]
+]
+}
+
+];
+
+let questionIndex=0;
+
+let quizAnswers=[];
+
+
+function renderQuiz(){
+
+let q=
+questions[questionIndex];
+
+document.getElementById("questionNumber").innerText=
+"Question "+(questionIndex+1)+" of "+questions.length;
+
+document.getElementById("questionPercent").innerText=
+Math.round(
+((questionIndex+1)/questions.length)*100
+)+"%";
+
+document.getElementById("questionText").innerText=
+q.q;
+
+document.getElementById("options").innerHTML=
+q.options.map((option,index)=>`
+
+<button
+class="option"
+onclick="answerQuestion(${index})">
+
+${option[0]}
+
+<span style="float:right">→</span>
+
+</button>
+
+`).join("");
+
+}
+
+
+function answerQuestion(index){
+
+quizAnswers.push(
+questions[questionIndex].options[index][1]
+);
+
+if(questionIndex<
+questions.length-1){
+
+questionIndex++;
+
+renderQuiz();
+
+}else{
+
+calculateMatch();
+
+}
+
+}
+
+
+/* =========================
+   CAREER MATCH
+========================= */
+
+function calculateMatch(){
+
+let counts={};
+
+quizAnswers.forEach(answer=>{
+
+counts[answer]=
+(counts[answer]||0)+1;
+
+});
+
+let best=
+Object.keys(counts)
+.sort((a,b)=>counts[b]-counts[a])[0];
+
+let careerInfo={
+
+"Software Developer":
+[
+"💻",
+["HTML","CSS","JavaScript","React","Git","Problem Solving"]
+],
+
+"Data Scientist":
+[
+"📊",
+["Python","SQL","Statistics","Pandas","Machine Learning","Data Visualization"]
+],
+
+"UI/UX Designer":
+[
+"🎨",
+["Figma","UX Research","Wireframes","Prototyping","Visual Design","Usability"]
+],
+
+"AI Engineer":
+[
+"🤖",
+["Python","Machine Learning","Deep Learning","APIs","Data","AI Tools"]
+]
+
+};
+
+selectedCareer=best;
+
+selectedEmoji=careerInfo[best][0];
+
+selectedSkills=careerInfo[best][1];
+
+let score=
+78+Math.floor(Math.random()*19);
+
+document.getElementById("matchScore").innerText=
+score+"%";
+
+document.getElementById("matchCareer").innerText=
+selectedEmoji+" "+selectedCareer;
+
+document.getElementById("matchDescription").innerText=
+"You have a strong interest match with this career direction.";
+
+document.getElementById("quizArea").style.display="none";
+
+document.getElementById("result").style.display="block";
+
+chooseCareerData();
+
+}
+
+
+function chooseCareerData(){
+
+document.getElementById("dashboardCareer").innerText=
+selectedEmoji+" "+selectedCareer;
+
+document.getElementById("roadmapTitle").innerText=
+selectedEmoji+" "+selectedCareer+" Roadmap";
+
+renderSkills();
+
+renderRoadmap();
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function scrollToAdvisor(){
+
+document.getElementById("advisor")
+.scrollIntoView({behavior:"smooth"});
+
+}
+
+function scrollToCareers(){
+
+document.getElementById("careers")
+.scrollIntoView({behavior:"smooth"});
+
+}
+
+function goRoadmap(){
+
+document.getElementById("roadmap")
+.scrollIntoView({behavior:"smooth"});
+
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+function toggleDark(){
+
+document.body.classList.toggle("dark");
+
+localStorage.setItem(
+"career_dark",
+document.body.classList.contains("dark")
+);
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function openInfo(){
+
+document.getElementById("infoModal")
+.classList.add("show");
+
+}
+
+function closeInfo(){
+
+document.getElementById("infoModal")
+.classList.remove("show");
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+let toast=
+document.getElementById("toast");
+
+toast.innerText=message;
+
+toast.classList.add("show");
+
+setTimeout(()=>{
+
+toast.classList.remove("show");
+
+},2200);
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+if(
+localStorage.getItem("career_dark")==="true"
+){
+
+document.body.classList.add("dark");
+
+}
+
+renderSkills();
+
+renderRoadmap();
+
+renderQuiz();
+
+</script>
+
+</body>
+</html>
